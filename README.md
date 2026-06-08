@@ -31,17 +31,17 @@ The following components are required to assemble PathFinder:
 
 | Component | Quantity | Estimated Price ($) | Function |
 | :--- | :---: | :---: | :--- |
-| [ESP32 WROOM 38-Pin Development Board](https://robu.in/product/esp32-wroom-32-38pin-development-board/) | 1 | 3.55 | Main microcontroller for path planning and telemetry web hosting |
-| [MPU6050 3-Axis Gyroscope and Accelerometer](https://robu.in/product/mpu-6050-3-axis-accelerometer-and-gyro-sensor/) | 1 | 2.08 | IMU to track relative yaw heading angle for straight line driving |
-| [L298N 2A Based Motor Driver Module](https://robu.in/product/l298n-2a-based-motor-driver-module/) | 1 | 1.75 | Controls speed and direction of the DC gear motors |
-| [4WD Smart Robot Car Chassis Kit](https://robu.in/product/4wd-smart-robot-car-chassis-kits/) | 1 | 6.60 | Robot chassis structural plate including four DC gear motors and wheels |
-| [DFPlayer Mini MP3 Player Module](https://robu.in/product/dfrobot-dfplayer-a-mini-mp3-player/) | 1 | 1.86 | Sound decoder to play voice alerts and confirmation status clips |
-| [Stereo Enclosed Speaker 3W 8 Ohm (Pair)](https://robu.in/product/stereo-enclosed-speaker-3w-8-with-jst-ph2-0-interface-pair/) | 1 | 2.70 | Compact enclosed speaker for voice playback output |
-| [HC-SR04 Ultrasonic Sonar Distance Sensor](https://robu.in/product/hc-sr04-ultrasonic-sensor/) | 3 | 3.06 | Provides range distances for front/left/right obstacle avoidance routing |
-| [DC-DC LM2596 Buck Converter Step Down Module](https://robu.in/product/dc-dc-lm2596-buck-converter-step-down-module/) | 1 | 0.78 | Regulates battery power down to stable 5V for the ESP32 and sensors |
-| [Orange 1000mAh 3S LiPo Battery Pack](https://robu.in/product/orange-1000mah-3s-30c60c-lipo-battery-pack/) | 1 | 6.95 | Rechargeable power supply pack for driving the vehicle |
-| [Solderless Breadboard 830 Points](https://robu.in/product/gl-12-solderless-breadboard-830-points/) | 1 | 1.14 | Prototype board to plug in sensors and wire connections |
-| [40pcs 10cm Male to Male Jumper Wire](https://robu.in/product/40pcs-10cm-male-to-male-jumper-wire/) | 1 | 0.66 | Flexible jumper wire pins to route signals between components |
+| [ESP32 NodeMCU Development Board](https://www.amazon.com/dp/B08286C22B) | 1 | 7.99 | Main controller (Logic and web interface) |
+| [MPU6050 IMU Gyroscope Module](https://www.amazon.com/dp/B008BOPN40) | 1 | 5.99 | Heading/yaw tracking sensor |
+| [L298N H-Bridge Motor Driver](https://www.amazon.com/dp/B014KMHSW6) | 1 | 5.99 | Dual motor driver for differential steering |
+| [DC Gear Motors with Wheels](https://www.amazon.com/dp/B07DNCPX65) | 4 | 12.99 | 4WD chassis drive motors |
+| [DFPlayer Mini MP3 Player](https://www.amazon.com/dp/B08G1F2YV5) | 1 | 6.49 | Audio module for pre-recorded status voice clips |
+| [Small 8 Ohm 2W Speaker](https://www.amazon.com/dp/B0738NLFTG) | 1 | 5.99 | Voice output |
+| [HC-SR04 Ultrasonic Sensors](https://www.amazon.com/dp/B01MA4O5G5) | 3 | 8.99 | Front, Left, and Right distance tracking |
+| [LM2596 Buck Converter](https://www.amazon.com/dp/B01GD81H6U) | 1 | 6.99 | Step-down battery voltage to 5V |
+| [3S 11.1V LiPo Battery](https://www.amazon.com/dp/B0754M57C7) | 1 | 18.99 | Drive power source |
+| [4WD Robot Chassis Plate Kit](https://www.amazon.com/dp/B07G155RW4) | 1 | 15.99 | Structural baseplate frame |
+| [Jumper Wires & Breadboard](https://www.amazon.com/dp/B01EV70C78) | 1 | 5.99 | Interface wiring |
 
 
 ---

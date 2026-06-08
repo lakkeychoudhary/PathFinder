@@ -1,12 +1,12 @@
 Name,Purpose,Quantity,Total Cost (USD),Link,Distributor
-ESP32 WROOM 38-Pin Development Board,Main microcontroller for self-driving path planning and web dashboard hosting,1,3.55,https://robu.in/product/esp32-wroom-32-38pin-development-board/,Robu.in
-MPU6050 3-Axis Gyroscope and Accelerometer,IMU sensor to track relative yaw heading angle for straight line driving and pivot turns,1,2.08,https://robu.in/product/mpu-6050-3-axis-accelerometer-and-gyro-sensor/,Robu.in
-L298N 2A Based Motor Driver Module,H-Bridge driver to control speed (PWM) and steering direction of the DC motors,1,1.75,https://robu.in/product/l298n-2a-based-motor-driver-module/,Robu.in
-4WD Smart Robot Car Chassis Kit,Double-layer acrylic platform framework including 4 DC gear motors and 4 wheels,1,6.60,https://robu.in/product/4wd-smart-robot-car-chassis-kits/,Robu.in
-DFPlayer Mini MP3 Player Module,Hardware sound decoder to play voice responses/status warnings,1,1.86,https://robu.in/product/dfrobot-dfplayer-a-mini-mp3-player/,Robu.in
-Stereo Enclosed Speaker 3W 8 Ohm (Pair),Compact enclosed speakers for vocal playbacks from the MP3 card,1,2.70,https://robu.in/product/stereo-enclosed-speaker-3w-8-with-jst-ph2-0-interface-pair/,Robu.in
-HC-SR04 Ultrasonic Sonar Distance Sensor,Ranging sensors for front left and right obstacle routing,3,3.06,https://robu.in/product/hc-sr04-ultrasonic-sensor/,Robu.in
-DC-DC LM2596 Buck Converter Step Down Module,Steps down 11.1V battery voltage to a stable 5V line for the ESP32 and logic chips,1,0.78,https://robu.in/product/dc-dc-lm2596-buck-converter-step-down-module/,Robu.in
-Orange 1000mAh 3S LiPo Battery Pack,High discharge 11.1V rechargeable power supply pack for driving the vehicle motors,1,6.95,https://robu.in/product/orange-1000mah-3s-30c60c-lipo-battery-pack/,Robu.in
-Solderless Breadboard 830 Points,Prototyping board to mount and interconnect the ESP32 and sensor pins,1,1.14,https://robu.in/product/gl-12-solderless-breadboard-830-points/,Robu.in
-40pcs 10cm Male to Male Jumper Wire,Signal routing cables to connect the components on the board,1,0.66,https://robu.in/product/40pcs-10cm-male-to-male-jumper-wire/,Robu.in
+ESP32 NodeMCU Development Board,Main controller for logic and web interface,1,7.99,https://www.amazon.com/dp/B08286C22B,Amazon
+MPU6050 IMU Gyroscope Module,Heading and yaw tracking sensor,1,5.99,https://www.amazon.com/dp/B008BOPN40,Amazon
+L298N H-Bridge Motor Driver,Dual motor driver for differential steering,1,5.99,https://www.amazon.com/dp/B014KMHSW6,Amazon
+DC Gear Motors with Wheels,4WD chassis drive motors,4,12.99,https://www.amazon.com/dp/B07DNCPX65,Amazon
+DFPlayer Mini MP3 Player,Audio module for pre-recorded status voice clips,1,6.49,https://www.amazon.com/dp/B08G1F2YV5,Amazon
+Small 8 Ohm 2W Speaker,Voice output,1,5.99,https://www.amazon.com/dp/B0738NLFTG,Amazon
+HC-SR04 Ultrasonic Sensors,Front Left and Right distance tracking,3,8.99,https://www.amazon.com/dp/B01MA4O5G5,Amazon
+LM2596 Buck Converter,Step-down battery voltage to 5V,1,6.99,https://www.amazon.com/dp/B01GD81H6U,Amazon
+3S 11.1V LiPo Battery,Drive power source,1,18.99,https://www.amazon.com/dp/B0754M57C7,Amazon
+4WD Robot Chassis Plate Kit,Structural baseplate frame,1,15.99,https://www.amazon.com/dp/B07G155RW4,Amazon
+Jumper Wires & Breadboard,Interface wiring,1,5.99,https://www.amazon.com/dp/B01EV70C78,Amazon
