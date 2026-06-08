@@ -1,12 +1,12 @@
 Part Name,Quantity,Price,Purchase Link,Purpose
-ESP32 NodeMCU Development Board,1,7.99,https://www.amazon.com/dp/B08286C22B,Main controller for self-driving logic and communication
-MPU6050 IMU Gyroscope Module,1,5.99,https://www.amazon.com/dp/B008BOPN40,Tracks yaw heading angle for precise turning and straight driving
-L298N Dual H-Bridge Motor Driver,1,5.99,https://www.amazon.com/dp/B014KMHSW6,Controls speed and direction of the DC gear motors
-DC Gear Motor with Wheel,4,12.99,https://www.amazon.com/dp/B07DNCPX65,Drive motors for 4WD chassis movement
-DFPlayer Mini MP3 Player Module,1,6.49,https://www.amazon.com/dp/B08G1F2YV5,Audio module to play voice feedback
-Small 8 Ohm 2W Speaker,1,5.99,https://www.amazon.com/dp/B0738NLFTG,Speaker output for DFPlayer Mini alerts
-HC-SR04 Ultrasonic Sensor,3,8.99,https://www.amazon.com/dp/B01MA4O5G5,Multi-direction distance sensors for obstacle avoidance
-LM2596 Buck Converter Module,1,6.99,https://www.amazon.com/dp/B01GD81H6U,Regulates 12V battery power down to 5V for ESP32 and modules
-3S 11.1V LiPo Battery,1,18.99,https://www.amazon.com/dp/B0754M57C7,High voltage power source for motors
-4WD Smart Robot Car Chassis Kit,1,15.99,https://www.amazon.com/dp/B07G155RW4,Mechanical platform for the self-driving car
-Jumper Wires & Prototype Board,1,5.99,https://www.amazon.com/dp/B01EV70C78,Electrical wiring interfaces
+Adafruit HUZZAH32 ESP32 Feather Board,1,19.95,https://www.adafruit.com/product/3405,Main microcontroller for self-driving path planning and web dashboard hosting
+Adafruit MPU-6050 6-DoF Sensor Breakout,1,9.95,https://www.adafruit.com/product/3886,IMU sensor to track relative yaw heading angle for straight line driving
+Adafruit TB6612 H-Bridge Motor Driver Breakout,1,7.50,https://www.adafruit.com/product/2448,Controls speed and direction of the two DC gear motors
+Adafruit Mini Robot Rover Chassis Kit,1,19.95,https://www.adafruit.com/product/2939,Robot chassis structure including two yellow DC TT gear motors and wheels
+DFRobot DFPlayer Mini MP3 Module,1,5.90,https://www.dfrobot.com/product-1121.html,Sound decoder to play voice alerts and confirmation status clips
+Adafruit Mono Enclosed Speaker (3W 4 Ohm),1,3.95,https://www.adafruit.com/product/3351,Compact enclosed speaker for voice playback output
+Adafruit HC-SR04 Ultrasonic Distance Sensor,3,11.85,https://www.adafruit.com/product/3942,Provides range distances for front/left/right obstacle avoidance routing
+Adafruit UBEC 5V 3A Step-Down Buck Converter,1,9.95,https://www.adafruit.com/product/1385,Regulates battery power down to stable 5V for the ESP32 and sensors
+SparkFun Lithium Ion Battery Pack (7.4V 1000mAh),1,9.95,https://www.sparkfun.com/products/11855,Main rechargeable power supply pack for driving the vehicle
+Adafruit Half-Size Breadboard,1,5.00,https://www.adafruit.com/product/64,Prototype board to plug in sensors and wire connections
+Adafruit Premium Male/Male Jumper Wires (20-Pack),1,3.95,https://www.adafruit.com/product/1956,Flexible jumper wire pins to route signals between components

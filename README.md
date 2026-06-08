@@ -31,17 +31,17 @@ The following components are required to assemble PathFinder:
 
 | Component | Quantity | Estimated Price ($) | Function |
 | :--- | :---: | :---: | :--- |
-| [ESP32 NodeMCU Development Board](https://www.amazon.com/dp/B08286C22B) | 1 | 7.99 | Main controller (Logic and web interface) |
-| [MPU6050 IMU Gyroscope Module](https://www.amazon.com/dp/B008BOPN40) | 1 | 5.99 | Heading/yaw tracking sensor |
-| [L298N H-Bridge Motor Driver](https://www.amazon.com/dp/B014KMHSW6) | 1 | 5.99 | Dual motor driver for differential steering |
-| [DC Gear Motors with Wheels](https://www.amazon.com/dp/B07DNCPX65) | 4 | 12.99 | 4WD chassis drive motors |
-| [DFPlayer Mini MP3 Player](https://www.amazon.com/dp/B08G1F2YV5) | 1 | 6.49 | Audio module for pre-recorded status voice clips |
-| [Small 8 Ohm 2W Speaker](https://www.amazon.com/dp/B0738NLFTG) | 1 | 5.99 | Voice output |
-| [HC-SR04 Ultrasonic Sensors](https://www.amazon.com/dp/B01MA4O5G5) | 3 | 8.99 | Front, Left, and Right distance tracking |
-| [LM2596 Buck Converter](https://www.amazon.com/dp/B01GD81H6U) | 1 | 6.99 | Step-down battery voltage to 5V |
-| [3S 11.1V LiPo Battery](https://www.amazon.com/dp/B0754M57C7) | 1 | 18.99 | Drive power source |
-| [4WD Robot Chassis Plate Kit](https://www.amazon.com/dp/B07G155RW4) | 1 | 15.99 | Structural baseplate frame |
-| [Jumper Wires & Breadboard](https://www.amazon.com/dp/B01EV70C78) | 1 | 5.99 | Interface wiring |
+| [Adafruit HUZZAH32 ESP32 Feather Board](https://www.adafruit.com/product/3405) | 1 | 19.95 | Main microcontroller for path planning and telemetry web hosting |
+| [Adafruit MPU-6050 6-DoF Sensor Breakout](https://www.adafruit.com/product/3886) | 1 | 9.95 | IMU to track relative yaw heading angle for straight line driving |
+| [Adafruit TB6612 H-Bridge Motor Driver Breakout](https://www.adafruit.com/product/2448) | 1 | 7.50 | Controls speed and direction of the DC gear motors |
+| [Adafruit Mini Robot Rover Chassis Kit](https://www.adafruit.com/product/2939) | 1 | 19.95 | Robot chassis structural plate including two DC TT motors and wheels |
+| [DFRobot DFPlayer Mini MP3 Module](https://www.dfrobot.com/product-1121.html) | 1 | 5.90 | Sound decoder to play voice alerts and confirmation status clips |
+| [Adafruit Mono Enclosed Speaker (3W 4 Ohm)](https://www.adafruit.com/product/3351) | 1 | 3.95 | Compact enclosed speaker for voice playback output |
+| [Adafruit HC-SR04 Ultrasonic Distance Sensor](https://www.adafruit.com/product/3942) | 3 | 11.85 | Provides range distances for front/left/right obstacle avoidance routing |
+| [Adafruit UBEC 5V 3A Step-Down Buck Converter](https://www.adafruit.com/product/1385) | 1 | 9.95 | Regulates battery power down to stable 5V for the ESP32 and sensors |
+| [SparkFun Lithium Ion Battery Pack (7.4V 1000mAh)](https://www.sparkfun.com/products/11855) | 1 | 9.95 | Rechargeable power supply pack for driving the vehicle |
+| [Adafruit Half-Size Breadboard](https://www.adafruit.com/product/64) | 1 | 5.00 | Prototype board to plug in sensors and wire connections |
+| [Adafruit Premium Male/Male Jumper Wires (20-Pack)](https://www.adafruit.com/product/1956) | 1 | 3.95 | Flexible jumper wire pins to route signals between components |
 
 ---
 
