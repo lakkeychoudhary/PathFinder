@@ -4,10 +4,17 @@
   "editor": "wokwi",
   "parts": [
     { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
-    { "type": "wokwi-mpu6050", "id": "imu", "top": -120, "left": -150, "attrs": {} },
+    { "type": "wokwi-mpu6050", "id": "imu", "top": -150, "left": -220, "attrs": {} },
     { "type": "wokwi-hc-sr04", "id": "ultrasonic_front", "top": 150, "left": 0, "attrs": {} },
-    { "type": "wokwi-hc-sr04", "id": "ultrasonic_left", "top": 150, "left": -200, "attrs": {} },
-    { "type": "wokwi-hc-sr04", "id": "ultrasonic_right", "top": 150, "left": 200, "attrs": {} }
+    { "type": "wokwi-hc-sr04", "id": "ultrasonic_left", "top": 150, "left": -260, "attrs": {} },
+    { "type": "wokwi-hc-sr04", "id": "ultrasonic_right", "top": 150, "left": 260, "attrs": {} },
+    { "type": "chip-l293d", "id": "l293d", "top": 350, "left": 0, "attrs": {} },
+    { "type": "wokwi-motor", "id": "motor_left", "top": 320, "left": -450, "attrs": {} },
+    { "type": "wokwi-motor", "id": "motor_right", "top": 320, "left": 450, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot_left", "top": -300, "left": -60, "attrs": { "label": "Tracker Left" } },
+    { "type": "wokwi-potentiometer", "id": "pot_right", "top": -300, "left": 120, "attrs": { "label": "Tracker Right" } },
+    { "type": "wokwi-led", "id": "led_red", "top": -100, "left": 40, "attrs": { "color": "red", "label": "Obstacle Warning" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": -60, "left": 40, "attrs": { "value": "220" } }
   ],
   "connections": [
     [ "esp:GND.1", "imu:GND", "black", [ "v0" ] ],
@@ -28,7 +35,36 @@
     [ "esp:GND.2", "ultrasonic_right:GND", "black", [ "v0" ] ],
     [ "esp:VIN", "ultrasonic_right:VCC", "red", [ "v0" ] ],
     [ "esp:D23", "ultrasonic_right:TRIG", "green", [ "v0" ] ],
-    [ "esp:D25", "ultrasonic_right:ECHO", "purple", [ "v0" ] ]
+    [ "esp:D25", "ultrasonic_right:ECHO", "purple", [ "v0" ] ],
+
+    [ "esp:D12", "l293d:EN1_2", "orange", [ "v0" ] ],
+    [ "esp:D13", "l293d:1A", "blue", [ "v0" ] ],
+    [ "l293d:1Y", "motor_left:1", "purple", [ "v0" ] ],
+    [ "l293d:GND.1", "esp:GND.1", "black", [ "v0" ] ],
+    [ "l293d:GND.2", "esp:GND.1", "black", [ "v0" ] ],
+    [ "l293d:2Y", "motor_left:2", "grey", [ "v0" ] ],
+    [ "esp:D14", "l293d:2A", "cyan", [ "v0" ] ],
+    [ "esp:VIN", "l293d:VCC2", "red", [ "v0" ] ],
+    [ "esp:D15", "l293d:EN3_4", "orange", [ "v0" ] ],
+    [ "esp:D27", "l293d:3A", "blue", [ "v0" ] ],
+    [ "l293d:3Y", "motor_right:1", "purple", [ "v0" ] ],
+    [ "l293d:GND.3", "esp:GND.2", "black", [ "v0" ] ],
+    [ "l293d:GND.4", "esp:GND.2", "black", [ "v0" ] ],
+    [ "l293d:4Y", "motor_right:2", "grey", [ "v0" ] ],
+    [ "esp:D26", "l293d:4A", "cyan", [ "v0" ] ],
+    [ "esp:3V3", "l293d:VCC1", "red", [ "v0" ] ],
+
+    [ "esp:GND.1", "pot_left:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "pot_left:VCC", "red", [ "v0" ] ],
+    [ "esp:D32", "pot_left:SIG", "orange", [ "v0" ] ],
+
+    [ "esp:GND.2", "pot_right:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "pot_right:VCC", "red", [ "v0" ] ],
+    [ "esp:D33", "pot_right:SIG", "orange", [ "v0" ] ],
+
+    [ "esp:D2", "r1:1", "green", [ "v0" ] ],
+    [ "r1:2", "led_red:A", "green", [ "v0" ] ],
+    [ "led_red:C", "esp:GND.1", "black", [ "v0" ] ]
   ],
   "dependencies": {}
 }

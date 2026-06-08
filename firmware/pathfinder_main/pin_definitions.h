@@ -31,4 +31,7 @@
 #define TRACKER_LEFT      32
 #define TRACKER_RIGHT     33
 
+// Status LED (Wokwi & Hardware warning indicator)
+#define LED_RED           2
+
 #endif

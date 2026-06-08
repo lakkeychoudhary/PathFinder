@@ -95,6 +95,10 @@ void setup() {
   pinMode(RIGHT_TRIG, OUTPUT);
   pinMode(RIGHT_ECHO, INPUT);
 
+  // Status Warning LED
+  pinMode(LED_RED, OUTPUT);
+  digitalWrite(LED_RED, LOW);
+
   // Initialize I2C and IMU
   Wire.begin(IMU_SDA, IMU_SCL, 400000);
   initMPU();
@@ -181,6 +185,7 @@ void Navigation_Loop(void * pvParameters) {
 
     // Obstacle Override Check (Safety lock)
     if (lastSensorFront < obstacleThreshold && lastSensorFront > 0 && currentState != STATE_MANUAL_CONTROL) {
+      digitalWrite(LED_RED, HIGH); // Turn on warning LED
       currentState = STATE_OBSTACLE_AVOIDANCE;
       currentStateStr = "OBSTACLE DETECTED";
       setMotors(0, 0); // Stop
@@ -212,6 +217,7 @@ void Navigation_Loop(void * pvParameters) {
         currentState = STATE_STANDBY;
         currentStateStr = "STANDBY";
       }
+      digitalWrite(LED_RED, LOW); // Turn off warning LED
     }
 
     // Path Execution steering calculations
