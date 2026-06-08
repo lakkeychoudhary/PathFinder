@@ -3,7 +3,7 @@
   "author": "lakkeychoudhary",
   "editor": "wokwi",
   "parts": [
-    { "type": "board-esp32-devkitc-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
     { "type": "wokwi-mpu6050", "id": "imu", "top": -120, "left": -150, "attrs": {} },
     { "type": "wokwi-hc-sr04", "id": "ultrasonic_front", "top": 150, "left": 0, "attrs": {} },
     { "type": "wokwi-hc-sr04", "id": "ultrasonic_left", "top": 150, "left": -200, "attrs": {} },
@@ -12,23 +12,23 @@
   "connections": [
     [ "esp:GND.1", "imu:GND", "black", [ "v0" ] ],
     [ "esp:3V3", "imu:VCC", "red", [ "v0" ] ],
-    [ "esp:IO21", "imu:SDA", "blue", [ "v0" ] ],
-    [ "esp:IO22", "imu:SCL", "yellow", [ "v0" ] ],
+    [ "esp:D21", "imu:SDA", "blue", [ "v0" ] ],
+    [ "esp:D22", "imu:SCL", "yellow", [ "v0" ] ],
 
     [ "esp:GND.1", "ultrasonic_front:GND", "black", [ "v0" ] ],
-    [ "esp:5V", "ultrasonic_front:VCC", "red", [ "v0" ] ],
-    [ "esp:IO4", "ultrasonic_front:TRIG", "green", [ "v0" ] ],
-    [ "esp:IO5", "ultrasonic_front:ECHO", "purple", [ "v0" ] ],
+    [ "esp:VIN", "ultrasonic_front:VCC", "red", [ "v0" ] ],
+    [ "esp:D4", "ultrasonic_front:TRIG", "green", [ "v0" ] ],
+    [ "esp:D5", "ultrasonic_front:ECHO", "purple", [ "v0" ] ],
 
     [ "esp:GND.1", "ultrasonic_left:GND", "black", [ "v0" ] ],
-    [ "esp:5V", "ultrasonic_left:VCC", "red", [ "v0" ] ],
-    [ "esp:IO18", "ultrasonic_left:TRIG", "green", [ "v0" ] ],
-    [ "esp:IO19", "ultrasonic_left:ECHO", "purple", [ "v0" ] ],
+    [ "esp:VIN", "ultrasonic_left:VCC", "red", [ "v0" ] ],
+    [ "esp:D18", "ultrasonic_left:TRIG", "green", [ "v0" ] ],
+    [ "esp:D19", "ultrasonic_left:ECHO", "purple", [ "v0" ] ],
 
     [ "esp:GND.2", "ultrasonic_right:GND", "black", [ "v0" ] ],
-    [ "esp:5V", "ultrasonic_right:VCC", "red", [ "v0" ] ],
-    [ "esp:IO23", "ultrasonic_right:TRIG", "green", [ "v0" ] ],
-    [ "esp:IO25", "ultrasonic_right:ECHO", "purple", [ "v0" ] ]
+    [ "esp:VIN", "ultrasonic_right:VCC", "red", [ "v0" ] ],
+    [ "esp:D23", "ultrasonic_right:TRIG", "green", [ "v0" ] ],
+    [ "esp:D25", "ultrasonic_right:ECHO", "purple", [ "v0" ] ]
   ],
   "dependencies": {}
 }

@@ -15,6 +15,10 @@
 #include <WebServer.h>
 #include <Wire.h>
 #include "pin_definitions.h"
+#include "imu.h"
+#include "audio.h"
+#include "navigation.h"
+#include "telemetry.h"
 
 // Task handles for dual-core execution
 TaskHandle_t Core0_Sensors_Handle;
@@ -23,45 +27,51 @@ TaskHandle_t Core1_Navigation_Handle;
 // Web server on Port 80
 WebServer server(80);
 
-// MPU6050 I2C Address
+// MPU6050 Global Variables
 const int MPU_addr = 0x68;
-
-// Heading control (Gyro Yaw lock)
-float targetHeading = 0.0;
 float currentYaw = 0.0;
-float yawError = 0.0;
-float kp_yaw = 4.5; // Gain to correct motor speeds to run straight
+float currentPitch = 0.0;
+float currentRoll = 0.0;
+float gyroBiasZ = 0.0;
 unsigned long lastImuTime = 0;
 
-// Navigation & coordinates
+// Navigation Global Variables
 float targetX = 0.0, targetY = 0.0;
 float currentX = 0.0, currentY = 0.0;
+float targetHeading = 0.0;
 bool isNavigating = false;
 int obstacleThreshold = 25; // cm
-
-// Speed settings
-int baseSpeed = 180; // 0-255 PWM range
+int baseSpeed = 180;        // 0-255 PWM speed
+float kp_yaw = 3.5;         // Proportional gain for gyro drift correction
+int leftMotorOutput = 0;
+int rightMotorOutput = 0;
 
 // System states
 enum SystemState {
   STATE_STANDBY,
   STATE_DRIVING,
   STATE_OBSTACLE_AVOIDANCE,
-  STATE_BEACON_CHASING
+  STATE_BEACON_CHASING,
+  STATE_MANUAL_CONTROL
 };
 SystemState currentState = STATE_STANDBY;
+const char* currentStateStr = "STANDBY";
+
+// Distance Sensor Readings
+long lastSensorFront = 999;
+long lastSensorLeft = 999;
+long lastSensorRight = 999;
 
 // Setup hardware serial for DFPlayer Mini
 HardwareSerial AudioSerial(2);
 
-// Forward declarations
-void initMPU();
-void updateYaw();
-void setMotors(int leftSpeed, int rightSpeed);
-void sendAudioCommand(uint8_t command, uint8_t dat1, uint8_t dat2);
-long readSensor(int trigPin, int echoPin);
-void handleRoot();
+// Forward Declarations of RTOS Loop Tasks
+void IMU_Sensor_Loop(void * pvParameters);
+void Navigation_Loop(void * pvParameters);
+
+// Web Server API Handlers
 void handleSetTarget();
+void handleManualControl();
 
 void setup() {
   Serial.begin(115200);
@@ -89,6 +99,12 @@ void setup() {
   Wire.begin(IMU_SDA, IMU_SCL, 400000);
   initMPU();
 
+  // Load IMU settings or calibrate
+  loadCalibration();
+  if (gyroBiasZ == 0.0) {
+    calibrateIMU();
+  }
+
   // Create Local WiFi Access Point
   WiFi.softAP("PathFinder_Tesla_Mini", "admin12345");
   Serial.println("AP Created: PathFinder_Tesla_Mini");
@@ -97,7 +113,9 @@ void setup() {
 
   // Web endpoints
   server.on("/", handleRoot);
+  server.on("/telemetry", handleTelemetry);
   server.on("/setTarget", HTTP_POST, handleSetTarget);
+  server.on("/manual", HTTP_POST, handleManualControl);
   server.begin();
 
   // Create background tasks
@@ -108,7 +126,7 @@ void setup() {
     NULL,
     1,
     &Core0_Sensors_Handle,
-    0 // Core 0 processes IMU gyro integration (Yaw tracking)
+    0 // Core 0 dedicated to real-time gyro integration and odometry calculations
   );
 
   xTaskCreatePinnedToCore(
@@ -118,12 +136,13 @@ void setup() {
     NULL,
     1,
     &Core1_Navigation_Handle,
-    1 // Core 1 handles steering, obstacles, voice, and web server
+    1 // Core 1 dedicated to networking & steering algorithms
   );
 
-  // Voice confirmation: "I am here boss, now where else do you want me to go?" (Track 0001)
+  // Startup Voice Feedback: "I am here boss..." (Track 0001)
   delay(1000);
-  sendAudioCommand(0x0F, 0x01, 0x01); 
+  setVolume(25);
+  playTrack(TRACK_STARTUP); 
 }
 
 void loop() {
@@ -131,7 +150,7 @@ void loop() {
 }
 
 // ----------------------------------------------------
-// CORE 0: IMU integration for Heading Angle (Yaw)
+// CORE 0: IMU gyro calculations & Odometry tracking
 // ----------------------------------------------------
 void IMU_Sensor_Loop(void * pvParameters) {
   TickType_t xLastWakeTime = xTaskGetTickCount();
@@ -139,7 +158,11 @@ void IMU_Sensor_Loop(void * pvParameters) {
   lastImuTime = micros();
 
   for(;;) {
-    updateYaw();
+    updateIMU();
+    
+    // Update odometry with actual motor speeds
+    updateOdometry(leftMotorOutput, rightMotorOutput, 0.01);
+    
     vTaskDelayUntil(&xLastWakeTime, xFrequency);
   }
 }
@@ -151,97 +174,72 @@ void Navigation_Loop(void * pvParameters) {
   for(;;) {
     server.handleClient();
 
-    // Check distance sensors
-    long frontDist = readSensor(FRONT_TRIG, FRONT_ECHO);
-    long leftDist = readSensor(LEFT_TRIG, LEFT_ECHO);
-    long rightDist = readSensor(RIGHT_TRIG, RIGHT_ECHO);
+    // Read range sensor inputs
+    lastSensorFront = readSensor(FRONT_TRIG, FRONT_ECHO);
+    lastSensorLeft = readSensor(LEFT_TRIG, LEFT_ECHO);
+    lastSensorRight = readSensor(RIGHT_TRIG, RIGHT_ECHO);
 
-    if (frontDist < obstacleThreshold && frontDist > 0) {
+    // Obstacle Override Check (Safety lock)
+    if (lastSensorFront < obstacleThreshold && lastSensorFront > 0 && currentState != STATE_MANUAL_CONTROL) {
       currentState = STATE_OBSTACLE_AVOIDANCE;
+      currentStateStr = "OBSTACLE DETECTED";
       setMotors(0, 0); // Stop
       
-      // Play obstacle alert sound (Track 0002)
-      sendAudioCommand(0x0F, 0x01, 0x02);
-      vTaskDelay(pdMS_TO_TICKS(500));
+      playTrack(TRACK_OBSTACLE);
+      vTaskDelay(pdMS_TO_TICKS(600));
 
-      // Backup briefly
-      setMotors(-150, -150);
+      // Backup
+      setMotors(-160, -160);
       vTaskDelay(pdMS_TO_TICKS(800));
       setMotors(0, 0);
 
-      // Pivot away from the obstacle
-      if (leftDist > rightDist) {
-        // Spin Left using Gyro Yaw offset
+      // Pivot to clear side
+      if (lastSensorLeft > lastSensorRight) {
         targetHeading -= 90.0;
         setMotors(-150, 150);
       } else {
-        // Spin Right
         targetHeading += 90.0;
         setMotors(150, -150);
       }
       
-      vTaskDelay(pdMS_TO_TICKS(800)); // Allow turning execution time
+      vTaskDelay(pdMS_TO_TICKS(800));
       setMotors(0, 0);
-      currentState = STATE_DRIVING;
+      
+      if (isNavigating) {
+        currentState = STATE_DRIVING;
+        currentStateStr = "DRIVING";
+      } else {
+        currentState = STATE_STANDBY;
+        currentStateStr = "STANDBY";
+      }
     }
 
-    // Target tracking / Beacon chasing
-    int leftIR = analogRead(TRACKER_LEFT);
-    int rightIR = analogRead(TRACKER_RIGHT);
+    // Path Execution steering calculations
+    if (currentState == STATE_DRIVING && isNavigating) {
+      currentStateStr = "DRIVING";
+      processPathfinding();
 
-    if (currentState == STATE_DRIVING || isNavigating) {
-      if (leftIR > 800 || rightIR > 800) {
-        // Target beacon detected! Chase it
-        currentState = STATE_BEACON_CHASING;
-        int diff = leftIR - rightIR;
-        int steerCorrection = diff / 4;
-        setMotors(baseSpeed + steerCorrection, baseSpeed - steerCorrection);
-      } else {
-        // Gyro-assisted straight line driving using Target Heading Lock
-        yawError = targetHeading - currentYaw;
-        int yawCorrection = yawError * kp_yaw;
-        setMotors(baseSpeed - yawCorrection, baseSpeed + yawCorrection);
-      }
-    } else {
-      setMotors(0, 0); // Standby
+      // Heading steering mix
+      float yawError = targetHeading - currentYaw;
+      int yawCorrection = yawError * kp_yaw;
+      
+      setMotors(baseSpeed - yawCorrection, baseSpeed + yawCorrection);
+    } else if (currentState == STATE_STANDBY) {
+      currentStateStr = "STANDBY";
+      setMotors(0, 0);
+    } else if (currentState == STATE_MANUAL_CONTROL) {
+      currentStateStr = "MANUAL INTERACTION";
     }
 
     vTaskDelay(pdMS_TO_TICKS(50)); // 20 Hz loop
   }
 }
 
-// MPU6050 Helpers
-void initMPU() {
-  Wire.beginTransmission(MPU_addr);
-  Wire.write(0x6B); // PWR_MGMT_1
-  Wire.write(0);    // Wake up
-  Wire.endTransmission(true);
-}
-
-void updateYaw() {
-  Wire.beginTransmission(MPU_addr);
-  Wire.write(0x47); // GYRO_ZOUT_H
-  Wire.endTransmission(false);
-  Wire.requestFrom(MPU_addr, 2, true);
-  
-  int16_t GyZ = Wire.read()<<8|Wire.read();
-
-  unsigned long now = micros();
-  float dt = (now - lastImuTime) / 1000000.0;
-  lastImuTime = now;
-
-  // Convert raw Z gyro value to degrees/sec (FS_SEL = 0 -> 131 LSB/deg/s)
-  float gyroYawRate = GyZ / 131.0;
-  
-  // Integrate gyro rate to get relative Yaw angle
-  if (abs(gyroYawRate) > 0.1) { // Deadzone filter
-    currentYaw += gyroYawRate * dt;
-  }
-}
-
 // Drive Motor Interface
 void setMotors(int leftSpeed, int rightSpeed) {
-  // Constrain speeds to 8-bit PWM limits
+  leftMotorOutput = leftSpeed;
+  rightMotorOutput = rightSpeed;
+
   leftSpeed = constrain(leftSpeed, -255, 255);
   rightSpeed = constrain(rightSpeed, -255, 255);
 
@@ -268,23 +266,6 @@ void setMotors(int leftSpeed, int rightSpeed) {
   }
 }
 
-// DFPlayer Mini UART packet sender
-void sendAudioCommand(uint8_t command, uint8_t dat1, uint8_t dat2) {
-  uint8_t buffer[10] = { 0x7E, 0xFF, 0x06, command, 0x00, dat1, dat2, 0x00, 0x00, 0xEF };
-  
-  uint16_t sum = 0;
-  for (int i=1; i<7; i++) {
-    sum += buffer[i];
-  }
-  sum = -sum;
-  buffer[7] = (uint8_t)(sum >> 8);
-  buffer[8] = (uint8_t)(sum & 0xFF);
-  
-  for (int i=0; i<10; i++) {
-    AudioSerial.write(buffer[i]);
-  }
-}
-
 long readSensor(int trigPin, int echoPin) {
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
@@ -297,23 +278,7 @@ long readSensor(int trigPin, int echoPin) {
   return duration * 0.034 / 2;
 }
 
-// Web Server Interface
-void handleRoot() {
-  String html = "<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'>";
-  html += "<style>body{font-family:sans-serif; text-align:center; background:#0f0f15; color:#e0e0eb;}";
-  html += "input{padding:10px; margin:5px; font-size:16px; border-radius:5px; border:1px solid #444; background:#222; color:#fff;}";
-  html += "button{padding:12px 24px; font-size:16px; background:#e85a4f; border:none; border-radius:5px; color:#fff; cursor:pointer;}";
-  html += "button:hover{background:#d84a3f;}";
-  html += "</style></head><body>";
-  html += "<h1>PathFinder Tesla-Mini Controller</h1>";
-  html += "<form action='/setTarget' method='POST'>";
-  html += "Target X Coordinate: <input type='number' step='0.1' name='x'><br>";
-  html += "Target Y Coordinate: <input type='number' step='0.1' name='y'><br><br>";
-  html += "<button type='submit'>Execute Navigation Command</button>";
-  html += "</form></body></html>";
-  server.send(200, "text/html", html);
-}
-
+// REST Web Server API Route Handlers
 void handleSetTarget() {
   if (server.hasArg("x") && server.hasArg("y")) {
     targetX = server.arg("x").toFloat();
@@ -321,11 +286,34 @@ void handleSetTarget() {
     isNavigating = true;
     currentState = STATE_DRIVING;
     
-    // Play voice confirmation: "Heading to destination, boss" (Track 0003)
-    sendAudioCommand(0x0F, 0x01, 0x03);
+    playTrack(TRACK_NAV_CONFIRM);
     
-    server.send(200, "text/plain", "Navigation target coordinates confirmed. Driving...");
+    server.send(200, "text/plain", "Target confirmed.");
   } else {
-    server.send(400, "text/plain", "Missing navigation variables");
+    server.send(400, "text/plain", "Missing coordinates.");
+  }
+}
+
+void handleManualControl() {
+  if (server.hasArg("dir")) {
+    String dir = server.arg("dir");
+    currentState = STATE_MANUAL_CONTROL;
+    isNavigating = false;
+
+    if (dir == "forward") {
+      setMotors(baseSpeed, baseSpeed);
+    } else if (dir == "backward") {
+      setMotors(-baseSpeed, -baseSpeed);
+    } else if (dir == "left") {
+      setMotors(-150, 150);
+    } else if (dir == "right") {
+      setMotors(150, -150);
+    } else if (dir == "stop") {
+      setMotors(0, 0);
+      currentState = STATE_STANDBY;
+    }
+    server.send(200, "text/plain", "Manual command executed.");
+  } else {
+    server.send(400, "text/plain", "Direction parameter missing.");
   }
 }
