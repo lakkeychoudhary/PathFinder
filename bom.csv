@@ -1,12 +1,12 @@
 Name,Purpose,Quantity,Total Cost (USD),Link,Distributor
-ESP32 NodeMCU Development Board,Main controller for logic and web interface,1,7.99,https://www.amazon.com/dp/B08286C22B,Amazon
-MPU6050 IMU Gyroscope Module,Heading and yaw tracking sensor,1,5.99,https://www.amazon.com/dp/B008BOPN40,Amazon
-L298N H-Bridge Motor Driver,Dual motor driver for differential steering,1,5.99,https://www.amazon.com/dp/B014KMHSW6,Amazon
-DC Gear Motors with Wheels,4WD chassis drive motors,4,12.99,https://www.amazon.com/dp/B07DNCPX65,Amazon
-DFPlayer Mini MP3 Player,Audio module for pre-recorded status voice clips,1,6.49,https://www.amazon.com/dp/B08G1F2YV5,Amazon
-Small 8 Ohm 2W Speaker,Voice output,1,5.99,https://www.amazon.com/dp/B0738NLFTG,Amazon
-HC-SR04 Ultrasonic Sensors,Front Left and Right distance tracking,3,8.99,https://www.amazon.com/dp/B01MA4O5G5,Amazon
-LM2596 Buck Converter,Step-down battery voltage to 5V,1,6.99,https://www.amazon.com/dp/B01GD81H6U,Amazon
-3S 11.1V LiPo Battery,Drive power source,1,18.99,https://www.amazon.com/dp/B0754M57C7,Amazon
-4WD Robot Chassis Plate Kit,Structural baseplate frame,1,15.99,https://www.amazon.com/dp/B07G155RW4,Amazon
-Jumper Wires & Breadboard,Interface wiring,1,5.99,https://www.amazon.com/dp/B01EV70C78,Amazon
+ESP32 30 Pin CP2102 Development Board,Main microcontroller for self-driving path planning and web dashboard hosting,1,4.62,https://quartzcomponents.com/products/esp32-30-pin-development-board-with-wi-fi-and-bluetooth,Quartz Components
+MPU6050 3-Axis Gyroscope and Accelerometer,IMU sensor to track relative yaw heading angle for straight line driving,1,1.87,https://quartzcomponents.com/products/mpu6050-gyroscope-accelerometer-sensor,Quartz Components
+MX1508 Dual H Bridge DC Motor Driver Module,H-Bridge driver to control speed and steering direction of the DC motor,1,0.34,https://quartzcomponents.com/products/mini-l298,Quartz Components
+GB37-555 12V DC Gear Motor 300RPM,High torque DC gear motor to drive the explorer rover chassis wheels,1,7.30,https://quartzcomponents.com/products/gb37-555-12v-dc-gear-motor-300rpm,Quartz Components
+YX5300 MP3 Voice Player Music Module,Hardware sound decoder to play status warnings and vocal responses,1,1.86,https://quartzcomponents.com/products/yx5300-mp3-player-module-voice-player-serial-control-music-module-with-tf-card-slot,Quartz Components
+OMIGA TCL 8 Ohm 10 Watt Dynamic Speaker,Dynamic speaker for vocal playback output from the MP3 card,1,1.67,https://quartzcomponents.com/products/8-ohm-10-watt-omiga-tcl-speaker,Quartz Components
+HC-SR04 Ultrasonic Sensor Module,Ranging sensors for front left and right obstacle routing,3,2.59,https://quartzcomponents.com/products/hc-sr04-ultrasonic-sensor-module,Quartz Components
+XY-3606 5A Step Down Power Supply Buck Converter,Steps down 11.1V battery voltage to stable 5V for the ESP32 and logic chips,1,1.66,https://quartzcomponents.com/products/24v-12v-to-5v-5a-step-down-power-supply-buck-converter-xy-3606-power-convertor,Quartz Components
+11.1V 4200mAh 3S 60C LiPo Rechargeable Battery,High capacity rechargeable power pack for driving the heavy-duty gear motors,1,32.35,https://quartzcomponents.com/products/11-1v-4200mah-3s-60c-lithium-polymer-rechargeable-battery,Quartz Components
+6WD All Terrain Explorer Rover Chassis Kit,High mobility 6WD chassis plate kit including suspension frames and wheels,1,12.99,https://quartzcomponents.com/products/combo-kit-of-5in1-equipment-3v-motor-9v-battery-with-on-off-switch-connector-and-propeller,Quartz Components
+MB102 Breadboard with Jumper Wires (Set of 80),Prototyping board with male and female jumper wires to connect sensor pins,1,2.09,https://quartzcomponents.com/products/mb102-colored-breadboard-830-points-with-jumper-wires-male-to-male-and-male-to-female-set-of-80,Quartz Components

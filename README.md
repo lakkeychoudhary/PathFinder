@@ -31,17 +31,17 @@ The following components are required to assemble PathFinder:
 
 | Component | Quantity | Estimated Price ($) | Function |
 | :--- | :---: | :---: | :--- |
-| [ESP32 NodeMCU Development Board](https://www.amazon.com/dp/B08286C22B) | 1 | 7.99 | Main controller (Logic and web interface) |
-| [MPU6050 IMU Gyroscope Module](https://www.amazon.com/dp/B008BOPN40) | 1 | 5.99 | Heading/yaw tracking sensor |
-| [L298N H-Bridge Motor Driver](https://www.amazon.com/dp/B014KMHSW6) | 1 | 5.99 | Dual motor driver for differential steering |
-| [DC Gear Motors with Wheels](https://www.amazon.com/dp/B07DNCPX65) | 4 | 12.99 | 4WD chassis drive motors |
-| [DFPlayer Mini MP3 Player](https://www.amazon.com/dp/B08G1F2YV5) | 1 | 6.49 | Audio module for pre-recorded status voice clips |
-| [Small 8 Ohm 2W Speaker](https://www.amazon.com/dp/B0738NLFTG) | 1 | 5.99 | Voice output |
-| [HC-SR04 Ultrasonic Sensors](https://www.amazon.com/dp/B01MA4O5G5) | 3 | 8.99 | Front, Left, and Right distance tracking |
-| [LM2596 Buck Converter](https://www.amazon.com/dp/B01GD81H6U) | 1 | 6.99 | Step-down battery voltage to 5V |
-| [3S 11.1V LiPo Battery](https://www.amazon.com/dp/B0754M57C7) | 1 | 18.99 | Drive power source |
-| [4WD Robot Chassis Plate Kit](https://www.amazon.com/dp/B07G155RW4) | 1 | 15.99 | Structural baseplate frame |
-| [Jumper Wires & Breadboard](https://www.amazon.com/dp/B01EV70C78) | 1 | 5.99 | Interface wiring |
+| [ESP32 30 Pin CP2102 Development Board](https://quartzcomponents.com/products/esp32-30-pin-development-board-with-wi-fi-and-bluetooth) | 1 | 4.62 | Main microcontroller for self-driving path planning and web dashboard hosting |
+| [MPU6050 3-Axis Gyroscope and Accelerometer](https://quartzcomponents.com/products/mpu6050-gyroscope-accelerometer-sensor) | 1 | 1.87 | IMU sensor to track relative yaw heading angle for straight line driving |
+| [MX1508 Dual H Bridge DC Motor Driver Module](https://quartzcomponents.com/products/mini-l298) | 1 | 0.34 | H-Bridge driver to control speed and steering direction of the DC motor |
+| [GB37-555 12V DC Gear Motor 300RPM](https://quartzcomponents.com/products/gb37-555-12v-dc-gear-motor-300rpm) | 1 | 7.30 | High torque DC gear motor to drive the explorer rover chassis wheels |
+| [YX5300 MP3 Voice Player Music Module](https://quartzcomponents.com/products/yx5300-mp3-player-module-voice-player-serial-control-music-module-with-tf-card-slot) | 1 | 1.86 | Hardware sound decoder to play status warnings and vocal responses |
+| [OMIGA TCL 8 Ohm 10 Watt Dynamic Speaker](https://quartzcomponents.com/products/8-ohm-10-watt-omiga-tcl-speaker) | 1 | 1.67 | Dynamic speaker for vocal playback output from the MP3 card |
+| [HC-SR04 Ultrasonic Sensor Module](https://quartzcomponents.com/products/hc-sr04-ultrasonic-sensor-module) | 3 | 2.59 | Ranging sensors for front left and right obstacle routing |
+| [XY-3606 5A Step Down Power Supply Buck Converter](https://quartzcomponents.com/products/24v-12v-to-5v-5a-step-down-power-supply-buck-converter-xy-3606-power-convertor) | 1 | 1.66 | Steps down 11.1V battery voltage to stable 5V for the ESP32 and logic chips |
+| [11.1V 4200mAh 3S 60C LiPo Rechargeable Battery](https://quartzcomponents.com/products/11-1v-4200mah-3s-60c-lithium-polymer-rechargeable-battery) | 1 | 32.35 | High capacity rechargeable power pack for driving the heavy-duty gear motors |
+| [6WD All Terrain Explorer Rover Chassis Kit](https://quartzcomponents.com/products/combo-kit-of-5in1-equipment-3v-motor-9v-battery-with-on-off-switch-connector-and-propeller) | 1 | 12.99 | High mobility 6WD chassis plate kit including suspension frames and wheels |
+| [MB102 Breadboard with Jumper Wires (Set of 80)](https://quartzcomponents.com/products/mb102-colored-breadboard-830-points-with-jumper-wires-male-to-male-and-male-to-female-set-of-80) | 1 | 2.09 | Prototyping board with male and female jumper wires to connect sensor pins |
 
 
 ---
