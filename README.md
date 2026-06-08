@@ -31,17 +31,18 @@ The following components are required to assemble PathFinder:
 
 | Component | Quantity | Estimated Price ($) | Function |
 | :--- | :---: | :---: | :--- |
-| [Adafruit HUZZAH32 ESP32 Feather Board](https://www.adafruit.com/product/3405) | 1 | 19.95 | Main microcontroller for path planning and telemetry web hosting |
-| [Adafruit MPU-6050 6-DoF Sensor Breakout](https://www.adafruit.com/product/3886) | 1 | 9.95 | IMU to track relative yaw heading angle for straight line driving |
-| [Adafruit TB6612 H-Bridge Motor Driver Breakout](https://www.adafruit.com/product/2448) | 1 | 7.50 | Controls speed and direction of the DC gear motors |
-| [Adafruit Mini Robot Rover Chassis Kit](https://www.adafruit.com/product/2939) | 1 | 19.95 | Robot chassis structural plate including two DC TT motors and wheels |
-| [DFRobot DFPlayer Mini MP3 Module](https://www.dfrobot.com/product-1121.html) | 1 | 5.90 | Sound decoder to play voice alerts and confirmation status clips |
-| [Adafruit Mono Enclosed Speaker (3W 4 Ohm)](https://www.adafruit.com/product/3351) | 1 | 3.95 | Compact enclosed speaker for voice playback output |
-| [Adafruit HC-SR04 Ultrasonic Distance Sensor](https://www.adafruit.com/product/3942) | 3 | 11.85 | Provides range distances for front/left/right obstacle avoidance routing |
-| [Adafruit UBEC 5V 3A Step-Down Buck Converter](https://www.adafruit.com/product/1385) | 1 | 9.95 | Regulates battery power down to stable 5V for the ESP32 and sensors |
-| [SparkFun Lithium Ion Battery Pack (7.4V 1000mAh)](https://www.sparkfun.com/products/11855) | 1 | 9.95 | Rechargeable power supply pack for driving the vehicle |
-| [Adafruit Half-Size Breadboard](https://www.adafruit.com/product/64) | 1 | 5.00 | Prototype board to plug in sensors and wire connections |
-| [Adafruit Premium Male/Male Jumper Wires (20-Pack)](https://www.adafruit.com/product/1956) | 1 | 3.95 | Flexible jumper wire pins to route signals between components |
+| [ESP32 WROOM 38-Pin Development Board](https://robu.in/product/esp32-wroom-32-38pin-development-board/) | 1 | 3.55 | Main microcontroller for path planning and telemetry web hosting |
+| [MPU6050 3-Axis Gyroscope and Accelerometer](https://robu.in/product/mpu-6050-3-axis-accelerometer-and-gyro-sensor/) | 1 | 2.08 | IMU to track relative yaw heading angle for straight line driving |
+| [L298N 2A Based Motor Driver Module](https://robu.in/product/l298n-2a-based-motor-driver-module/) | 1 | 1.75 | Controls speed and direction of the DC gear motors |
+| [4WD Smart Robot Car Chassis Kit](https://robu.in/product/4wd-smart-robot-car-chassis-kits/) | 1 | 6.60 | Robot chassis structural plate including four DC gear motors and wheels |
+| [DFPlayer Mini MP3 Player Module](https://robu.in/product/dfrobot-dfplayer-a-mini-mp3-player/) | 1 | 1.86 | Sound decoder to play voice alerts and confirmation status clips |
+| [Stereo Enclosed Speaker 3W 8 Ohm (Pair)](https://robu.in/product/stereo-enclosed-speaker-3w-8-with-jst-ph2-0-interface-pair/) | 1 | 2.70 | Compact enclosed speaker for voice playback output |
+| [HC-SR04 Ultrasonic Sonar Distance Sensor](https://robu.in/product/hc-sr04-ultrasonic-sensor/) | 3 | 3.06 | Provides range distances for front/left/right obstacle avoidance routing |
+| [DC-DC LM2596 Buck Converter Step Down Module](https://robu.in/product/dc-dc-lm2596-buck-converter-step-down-module/) | 1 | 0.78 | Regulates battery power down to stable 5V for the ESP32 and sensors |
+| [Orange 1000mAh 3S LiPo Battery Pack](https://robu.in/product/orange-1000mah-3s-30c60c-lipo-battery-pack/) | 1 | 6.95 | Rechargeable power supply pack for driving the vehicle |
+| [Solderless Breadboard 830 Points](https://robu.in/product/gl-12-solderless-breadboard-830-points/) | 1 | 1.14 | Prototype board to plug in sensors and wire connections |
+| [40pcs 10cm Male to Male Jumper Wire](https://robu.in/product/40pcs-10cm-male-to-male-jumper-wire/) | 1 | 0.66 | Flexible jumper wire pins to route signals between components |
+
 
 ---
 
