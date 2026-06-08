@@ -1,0 +1,26 @@
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Arduino IDE build files
+build/
+bin/
+layout/
+
+# External hardware tools directories
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Local config & logs
+*.log
+local.properties
+.DS_Store
+
+# Agent workspace context (excluded from main repository)
+.agents/
