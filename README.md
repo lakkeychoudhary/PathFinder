@@ -4,6 +4,10 @@ PathFinder is an intelligent, self-driving autonomous vehicle (configured as a 4
 
 The system utilizes an ESP32 microcontroller with dual-core processing. One core is dedicated to high-frequency gyroscope sensor integration for a yaw-heading lock, while the second core runs the navigation control, obstacle routing, audio feedback, and the local web server.
 
+## Motivation (Why I Built This)
+
+I built PathFinder to explore real-time embedded systems, sensor fusion (combining IMUs and ultrasonic rangefinders), and autonomous route planning on a physical crawler. This project serves as a hands-on learning platform for understanding multi-core task scheduling (FreeRTOS) and wireless telemetry interfaces without relying on high-level microprocessors.
+
 ---
 
 ## Technical Specifications & Features
